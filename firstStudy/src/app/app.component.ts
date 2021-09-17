@@ -6,5 +6,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    visible : boolean = false;
+  id : string = "";
+  pwd : string = "";  
+  visible : boolean = true;
+  visible1 : boolean = false;
+  visible2 : boolean = false;
+
+  tryToLogin() : void{
+    console.log(this.id, this.pwd);
+    if(this.id =='admin' && this.pwd == '1234'){
+      this.visible = false;
+      this.visible1 = true;
+    } else if(this.id =='root' && this.pwd == '1234'){
+      this.visible = false;
+      this.visible2 = true;
+    }     
+  }
 }
