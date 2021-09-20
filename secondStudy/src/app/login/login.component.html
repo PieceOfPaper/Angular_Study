@@ -1,9 +1,9 @@
 <div>Wellocome</div>
-<input type="text" placeholder="id" [(ngModel)]="id"/>
-<input type="text" placeholder="password"  [(ngModel)]="pwd"/>
+<input type="text" placeholder="id" [formControl]="id"/>
+<input type="text" placeholder="password" [formControl]="pwd"/>
 <button (click)='tryToLogin()'>Login</button>
 <div>
-    <span [style.color]="'blue'" *ngIf="pwd && pwd.length < 4">비밀 번호 {{pwd}}는 4자리 이상이어야 합니다.</span>
+    <span  *ngIf="pwd.hasError('minlength') || pwd.hasError('required') ">비밀 번호 {{pwd.value}}는 4자리 이상이어야 합니다.</span>
 </div>
 <div *ngIf="getMessage" [ngClass]="styleArray">
    {{getMessage}}
