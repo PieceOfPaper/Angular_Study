@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MyServiceService } from './my-service.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,16 @@ import { Component } from '@angular/core';
 export class AppComponent {
   loginBool = true;
   boardBool = false;
+
+  constructor(private service : MyServiceService){
+    service.TV.subscribe( arg=>{
+      if(arg && arg.id){
+        console.log('로그인이 성공했군요 : ',arg);
+        this.loginBool = false;
+        this.boardBool = true;
+      }
+    });
+  }
 
   getEventThanks(event: any){
     console.log(event)

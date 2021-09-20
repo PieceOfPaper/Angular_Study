@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 
-import { INFORMATION } from '../MyType';
+import { MyServiceService } from '../my-service.service';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +10,17 @@ import { INFORMATION } from '../MyType';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @Input() visible1 : boolean = false;
-  @Output() sendMyEvent : EventEmitter<any> = new EventEmitter();
+  // @Input() visible1 : boolean = false;
+  // @Output() sendMyEvent : EventEmitter<any> = new EventEmitter();
   id = new FormControl('');
   pwd= new FormControl('', [ Validators.required, Validators.minLength(4) ]);
   private message = '';
-  
-  constructor(@Inject("sending_name") my_type : INFORMATION) { 
-    console.log(my_type);
+
+  private service: any;
+
+  constructor(s : MyServiceService) { 
+    this.service = s;
+    console.log(this.service)
   }
 
   ngOnInit(): void {
@@ -28,8 +31,7 @@ export class LoginComponent implements OnInit {
   tryToLogin() : void{
     if(this.id.value =='admin' && this.pwd.value == '1234'){
       alert('로그인합니다!');
-      this.visible1 = true;
-      this.sendMyEvent.emit(this.visible1);
+      this.service.addData(true, {id:'admin', name:'사용자'});
     } else if(this.id.value != 'admin'){
       this.setMessage = 'wrong id';
       this.styleArray.wrong_id = true;
