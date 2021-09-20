@@ -7,6 +7,14 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import {INFORMATION} from './MyType';
+
+const myData : INFORMATION = {  //내가 전달할 데이터
+  data1 : 'data1',
+  data2 : 1433,
+  data3 : ['data3_1','data3_2']
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +26,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {provide:'sending_name',useValue:myData}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

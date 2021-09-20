@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
+
+import { INFORMATION } from '../MyType';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +15,10 @@ export class LoginComponent implements OnInit {
   id = new FormControl('');
   pwd= new FormControl('', [ Validators.required, Validators.minLength(4) ]);
   private message = '';
-
-  constructor() { }
+  
+  constructor(@Inject("sending_name") my_type : INFORMATION) { 
+    console.log(my_type);
+  }
 
   ngOnInit(): void {
   }
