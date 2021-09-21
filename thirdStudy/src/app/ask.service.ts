@@ -1,30 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { AngularFirestore, CollectionReference, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AskService {
 
+  private DataBase: AngularFirestore;
+  private collectionArray: {[key: string]: AngularFirestoreCollection<any> | null} = {};
+
   //저장소(나중에 데이터베이스 서버)
   private readonly storage = {
     id : 'admin',
     passwd : '1234'
   }
-  constructor() { 
-    this.test1().subscribe((arg:any)=>{
-      console.log(arg)
-    });
-    this.test1().subscribe((arg:any)=>{
-      console.log(arg)
-    });  
+
+  constructor(db: AngularFirestore) {
+    this.DataBase = db;
   }
 
-  test1(){
-    return new Observable( arg=>{
-      arg.next({test:1});
-      arg.complete();
-    });
+  getItem(db_name: string) {
+    if(this.collectionArray[db_name]){  //등록에 의해 단순하게 생성되었다면
+      this.collectionArray[db_name] = null;
+    }
+    this.collectionArray[db_name] = this.DataBase.collection<any>(db_name, (ref: CollectionReference) => {
+      return ref;
+    });  //리턴
+    return this.collectionArray[db_name];
+  }
+
+  addItem(db_name : string, data : any){
+    if(this.collectionArray[db_name] == null){  //등록하러 왔는데 없다면,
+      this.collectionArray[db_name] = this.DataBase.collection<any>(db_name);
+    }
+    this.collectionArray[db_name]?.add(data);
   }
 
   //로그인을 시도하는 함수
