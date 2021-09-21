@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFirestoreModule, AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestoreModule, AngularFirestore, AngularFirestoreCollection, CollectionReference } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 @Component({
@@ -21,7 +21,9 @@ export class AppComponent {
   } 
 
   getItem(db_name : string){
-    this.itemsCollection = this.DataBase.collection<any>(db_name, (ref) =>ref);  //컬렉션에 접속    
-    return this.itemsCollection.valueChanges();  //리턴
+    this.itemsCollection = this.DataBase.collection<any>(db_name, (ref : CollectionReference) => {
+      return ref.orderBy('number','asc').startAt(1).limit(2);
+    });
+    return this.itemsCollection.valueChanges();
   }
 }
