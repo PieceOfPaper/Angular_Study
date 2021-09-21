@@ -12,7 +12,19 @@ export class AskService {
     passwd : '1234'
   }
   constructor() { 
+    this.test1().subscribe((arg:any)=>{
+      console.log(arg)
+    });
+    this.test1().subscribe((arg:any)=>{
+      console.log(arg)
+    });  
+  }
 
+  test1(){
+    return new Observable( arg=>{
+      arg.next({test:1});
+      arg.complete();
+    });
   }
 
   //로그인을 시도하는 함수
