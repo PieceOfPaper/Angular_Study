@@ -52,6 +52,22 @@ export class AskService {
     this.collectionArray[db_name]?.add(data);
   }
 
+  updateData(db_name: string, parameter : any, target_id : any){
+    this.collectionArray[db_name]?.stateChanges().pipe(
+      take(1), //구독행위는 1번만 하세요!
+      map( (actions:any) => {
+        return actions.map((a : any) => {
+          const data = a.payload.doc.data();  //데이터  
+          const ID = a.payload.doc.id;  //고유 키 값
+          if(target_id  == ID){  //들어온 아이디 값이 일치한다면
+            this.collectionArray[db_name]?.doc(ID).update(parameter);  //교체할 내용을 바꿉니다.
+          }
+          return data;
+        });
+      })
+    ).subscribe();
+  }
+
   //로그인을 시도하는 함수
   tryToLogin(param : any){
     return new Observable( arg=>{  //관측대상 생성
