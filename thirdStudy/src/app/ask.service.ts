@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { AngularFirestore, CollectionReference, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
+import {take, map} from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +20,19 @@ export class AskService {
 
   constructor(db: AngularFirestore) {
     this.DataBase = db;
+  }
+  
+  testPipeTake(){
+    this.DataBase.collection<any>("test").stateChanges().pipe(
+      take(1), 
+      map(actions => {
+        return actions.map(a => a.payload.doc.data());
+      })
+    ).subscribe(
+      arg=>{
+        console.log(arg);
+      }
+    );
   }
 
   getItem(db_name: string) {

@@ -9,10 +9,11 @@ import { AskService } from './ask.service';
 export class AppComponent {
   title = 'thirdStudy';
 
-  constructor(private service : AskService) {   
-    service.addItem("board",{number:5,hello:'hello',today:new Date()});
+  constructor(private service : AskService) {
     service.getItem("board")?.valueChanges().subscribe( arg => {
       console.log(arg);
     });
+
+    service.testPipeTake();  //추가!
   }  
 }
