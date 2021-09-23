@@ -13,6 +13,7 @@ export class AppComponent {
     service.getItem("board")?.valueChanges({idField: 'idx'}).subscribe( arg => {  //idField값에 idx를 부여하였습니다.
       console.log(arg);
     });
-    service.updateData('board',{number:10, new_text:'hello updater'},'OHW97JhpZeCB6dEp7KXo');
+    // service.updateData('board',{number:10, new_text:'hello updater'},'OHW97JhpZeCB6dEp7KXo');
+    service.updateData3('board',{number:10, new_text:'hello updater'},'OHW97JhpZeCB6dEp7KXo');
   }  
 }

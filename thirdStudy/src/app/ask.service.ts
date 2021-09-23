@@ -68,6 +68,18 @@ export class AskService {
     ).subscribe();
   }
 
+  updateData2(db_name: string, parameter : any, target_id : any){
+    this.collectionArray[db_name]?.doc(target_id).update(parameter); 
+  }
+
+  updateData3(db_name: string, parameter : any, target_id : any){
+    this.collectionArray[db_name]?.doc(target_id).set(parameter);
+  }
+
+  deleteData(db_name: string, target_id : any){  //삭제기능 입니다.
+    this.collectionArray[db_name]?.doc(target_id).delete();
+  }
+
   //로그인을 시도하는 함수
   tryToLogin(param : any){
     return new Observable( arg=>{  //관측대상 생성
