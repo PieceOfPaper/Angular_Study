@@ -1,5 +1,6 @@
-<input type="text" name='_title' [formControl]="title" my_check/>
+<!-- <input type="text" name='_title' [formControl]="title" my_check/> -->
 <!-- my_check은 my-check디렉티브 셀렉터이며, 유효성 검사 함수입니다. -->
-<div *ngIf="title.errors?.wrongID">
+<!-- <div *ngIf="title.errors?.wrongID">
   {{title.errors?.wrongID}} 형식은 사용할 수 없는 아이디 입니다.
-</div>
+</div> -->
+<div [ngStyle]="position" (mousemove)="getEvent($event)" (mousedown)="mouseStatus = true" (mouseup)="mouseStatus = false"  (mouseleave)="mouseStatus = false">Drag Area</div>
