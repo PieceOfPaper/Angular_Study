@@ -12,7 +12,14 @@ export class BoardComponent implements OnInit {
   private file: any | undefined;
   private path = "good";  //경로
 
-  constructor(private storage: AngularFireStorage) { }
+  url: any;  //a테그에게 줄 주소 값
+
+  constructor(private storage: AngularFireStorage) { 
+    this.storage.ref('/good/histogram.png').getDownloadURL().subscribe( arg=>{
+      console.log(arg)
+      this.url = arg;
+    });    
+  }
 
   ngOnInit(): void {
     

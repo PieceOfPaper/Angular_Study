@@ -16,6 +16,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';  //저장소 모듈
 import { BUCKET } from '@angular/fire/compat/storage';  //저장소 관련 버킷
 
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';  //권한 모듈!!!!
+
 const fireEnvironment = {
   production: true,
   firebase: {
@@ -47,7 +49,8 @@ const router : Routes = [  //라우팅
     FormsModule,
     AngularFireModule.initializeApp(fireEnvironment.firebase, '/'),
     AngularFirestoreModule,  //파이어베이스 데이터베이스와 관련된 모듈 사용
-    AngularFireStorageModule  //파일 저장소 관련된 객체
+    AngularFireStorageModule,  //파일 저장소 관련된 객체
+    AngularFireAuthModule,  //권한 모듈!!!!
   ],
   providers: [
     AskService,
