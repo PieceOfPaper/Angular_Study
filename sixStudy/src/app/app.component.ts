@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';  //추가
 import { my_check } from './my-check.directive';
 import {bigSmall} from './bigSmall';  //분리한 ts파일이 있는 위치
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,12 @@ import {bigSmall} from './bigSmall';  //분리한 ts파일이 있는 위치
 })
 export class AppComponent {
   title = new FormControl('', my_check()); 
+
+  constructor(private http: HttpClient){
+    this.http.post('/data/',{param : 'request param'}).subscribe( arg=>{
+      console.log(arg);
+    })
+  }
   
   private canElementMove = false;  //마우스의 상태를 나타내는 변수 입니다.
 
