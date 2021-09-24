@@ -5,11 +5,13 @@ import { AlertModule } from './alert/alert.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './test/test.component';
+import { HelloworldDirective } from './helloworld.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
+    TestComponent,
+    HelloworldDirective
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
 <p>test works!</p>
-<p>얼럿 모듈이 들어왔습니까 : {{test_name}}</p>
-<input type='button' value='테스트' (click) ='test()' />
+<p appHelloworld [colorCode]='"yellow"'>얼럿 모듈이 들어왔습니까 : {{test_name}}</p>
+<input type='button' value='테스트' (click) ='test()'/>
 <app-alert [name] ='test_name' (sendToEvent)='getEvent($event)'></app-alert>
