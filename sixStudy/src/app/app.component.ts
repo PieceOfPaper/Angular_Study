@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';  //추가
 import { my_check } from './my-check.directive';
+import {bigSmall} from './bigSmall';  //분리한 ts파일이 있는 위치
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  animations: [
+    bigSmall,
+  ], 
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
@@ -31,5 +35,13 @@ export class AppComponent {
       this.position.left = event.clientX - 100  + 'px';
       this.position.top = event.clientY - 100   + 'px';
     }
+  }
+
+  //에니메이션 -------------------------
+  isOpen = true;  //상태값
+
+  //버튼이벤트
+  trigger() {
+    this.isOpen = !this.isOpen;
   }
 }
